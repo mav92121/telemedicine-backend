@@ -16,6 +16,9 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("connected to db"));
+app.get("/hello-world", (req, res) => {
+  res.send("Hello World!");
+});
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
