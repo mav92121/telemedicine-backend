@@ -3,18 +3,19 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 import mongoose from "mongoose";
 import Document from "./Document.js";
+import dotenv from "dotenv";
 
-const uri =
-  "mongodb+srv://mohsinali530121:RrkfiPkjpjLw3YZ9@telemedicineideation.4essaa4.mongodb.net/?appName=telemedicineIdeation";
+const app = express();
+dotenv.config();
+const server = createServer(app);
+const CONNECTION_URL = process.env.CONNECTION_URL;
+const PORT = process.env.PORT || 4000;
 mongoose
-  .connect(uri, {
+  .connect(CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("connected to db"));
-
-const app = express();
-const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
@@ -47,6 +48,6 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log("listening on 3000");
+server.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 });
