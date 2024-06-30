@@ -4,12 +4,23 @@ import { createServer } from "http";
 import mongoose from "mongoose";
 import Document from "./Document.js";
 import dotenv from "dotenv";
+import cors from "cors";
 
 const app = express();
 dotenv.config();
 const server = createServer(app);
 const CONNECTION_URL = process.env.CONNECTION_URL;
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
+app.use(
+  cors({
+    credentials: true,
+    origin:
+      "https://6681a7d59fbda3647da0c8dd--meek-profiterole-6b3c13.netlify.app",
+    // origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 mongoose
   .connect(CONNECTION_URL, {
     useNewUrlParser: true,
@@ -21,7 +32,9 @@ app.get("/hello-world", (req, res) => {
 });
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    credentials: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   },
 });
 
