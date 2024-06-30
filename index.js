@@ -15,7 +15,8 @@ app.use(
   cors({
     credentials: true,
     origin:
-      "https://6681a7d59fbda3647da0c8dd--meek-profiterole-6b3c13.netlify.app",
+      // "https://6681a7d59fbda3647da0c8dd--meek-profiterole-6b3c13.netlify.app",
+      "https://mav92121.github.io/telemedicine-frontend",
     // origin: "http://localhost:5173",
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"],
